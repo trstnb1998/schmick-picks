@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
 import "./App.css";
-import { Picks } from "./features/picks/components/Picks";
+import { Picks } from "./pages/Picks";
 
 function App() {
 	return (

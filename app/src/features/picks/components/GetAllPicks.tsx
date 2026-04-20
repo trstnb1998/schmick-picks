@@ -1,6 +1,5 @@
 import { Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { SectionTitle } from "../../../components/section-title/SectionTitle";
 
 type Pick = {
 	eventId: string;
@@ -10,22 +9,20 @@ type Pick = {
 	createdAt: string;
 };
 
-const getAllPicks = async (): Promise<Pick[]> => {
+const fetchPicks = async (): Promise<Pick[]> => {
 	const url = import.meta.env.VITE_API_URL;
-	const res = await fetch(`${url}/picks`, {
-		cache: "no-store",
-	});
+	const res = await fetch(`${url}/picks`);
 
 	if (!res.ok) throw new Error("Failed to fetch picks");
 	return res.json();
 };
 
-export const Picks = () => {
+export const GetAllPicks = () => {
 	const [picks, setPicks] = useState<Pick[]>([]);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		getAllPicks()
+		fetchPicks()
 			.then(setPicks)
 			.catch(console.error)
 			.finally(() => setLoading(false));
@@ -34,7 +31,6 @@ export const Picks = () => {
 	if (loading) return <Typography>Loading...</Typography>;
 	return (
 		<Stack height="100vh">
-			<SectionTitle title="Schmick Picks Home Page" />
 			<ul>
 				{picks.map((pick) => (
 					<li key={pick.eventId}>{pick.eventName}</li>

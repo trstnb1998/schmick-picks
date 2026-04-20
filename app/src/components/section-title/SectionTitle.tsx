@@ -3,8 +3,6 @@ import { Stack, Typography } from "@mui/material";
 import type { PropsWithChildren, ReactNode } from "react";
 
 type SectionTitleProps = PropsWithChildren<{
-	noMargin?: boolean;
-	subtitle?: ReactNode;
 	title?: ReactNode;
 	titleVariant?: TypographyVariant;
 }>;

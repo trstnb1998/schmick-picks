@@ -1,5 +1,6 @@
 import { Container } from "@mui/material";
 import "./App.css";
+import { Picks } from "./features/picks/components/Picks";
 
 function App() {
 	return (
@@ -12,7 +13,7 @@ function App() {
 				width: "80%",
 			}}
 		>
-			Home Page
+			<Picks />
 		</Container>
 	);
 }

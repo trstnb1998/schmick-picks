@@ -1,0 +1,44 @@
+import { Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+
+type Pick = {
+	eventId: string;
+	eventName: string;
+	prediction: string;
+	status: "pending" | "won" | "lost";
+	createdAt: string;
+};
+
+const getAllPicks = async (): Promise<Pick[]> => {
+	const url = import.meta.env.VITE_API_URL;
+	const res = await fetch(`${url}/picks`, {
+		cache: "no-store",
+	});
+
+	if (!res.ok) throw new Error("Failed to fetch picks");
+	return res.json();
+};
+
+export const Picks = () => {
+	const [picks, setPicks] = useState<Pick[]>([]);
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		getAllPicks()
+			.then(setPicks)
+			.catch(console.error)
+			.finally(() => setLoading(false));
+	}, []);
+
+	if (loading) return <Typography>Loading...</Typography>;
+	return (
+		<>
+			<Typography variant="h1">Picks Home Page</Typography>
+			<ul>
+				{picks.map((pick) => (
+					<li key={pick.eventId}>{pick.eventName}</li>
+				))}
+			</ul>
+		</>
+	);
+};

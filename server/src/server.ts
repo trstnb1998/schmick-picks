@@ -61,6 +61,9 @@ const schmickPicksDatabase: SchmickPicksDatabase[] = [...defaultPicks];
 
 const server = http.createServer(
 	(req: http.IncomingMessage, res: http.ServerResponse) => {
+		res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+		res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+		res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 		const parsedUrl = new URL(req.url as string, `http://${req.headers.host}`);
 		const pathname = parsedUrl.pathname;
 		const query = parsedUrl.searchParams;

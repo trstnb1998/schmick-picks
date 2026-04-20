@@ -1,5 +1,6 @@
-import { Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import { SectionTitle } from "../../../components/section-title/SectionTitle";
 
 type Pick = {
 	eventId: string;
@@ -32,13 +33,13 @@ export const Picks = () => {
 
 	if (loading) return <Typography>Loading...</Typography>;
 	return (
-		<>
-			<Typography variant="h1">Picks Home Page</Typography>
+		<Stack height="100vh">
+			<SectionTitle title="Schmick Picks Home Page" />
 			<ul>
 				{picks.map((pick) => (
 					<li key={pick.eventId}>{pick.eventName}</li>
 				))}
 			</ul>
-		</>
+		</Stack>
 	);
 };
